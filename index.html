@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Football ⚽</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Écran d'accueil -->
+  <div id="pseudo-screen" class="fade-in">
+    <h2>Entrez votre pseudo pour commencer</h2>
+    <input type="text" id="pseudo-input" placeholder="Votre pseudo..." />
+    <h3>Choisis ton avatar</h3>
+    <div id="avatar-selection">
+      <img src="graaland.png" class="avatar-option" onclick="selectAvatar(this)">
+      <img src="100dent.png" class="avatar-option" onclick="selectAvatar(this)">
+      <img src="sercer.png" class="avatar-option" onclick="selectAvatar(this)">
+      <img src="pessoir.png" class="avatar-option" onclick="selectAvatar(this)">
+      <img src="pessisucre.png" class="avatar-option" onclick="selectAvatar(this)">
+      <img src="vinicius.png" class="avatar-option" onclick="selectAvatar(this)">
+      <img src="maitrewu.png" class="avatar-option" onclick="selectAvatar(this)">
+      <img src="angelo.png" class="avatar-option" onclick="selectAvatar(this)">
+    </div>
+    <button onclick="startQuiz()">Commencer</button>
+  </div>
+
+  <!-- Quiz -->
+  <div class="container" style="display: none;">
+    <h1>⚽ Quiz Football</h1>
+    <div class="quiz-row">
+      <div id="quiz-box">
+        <p id="question">Chargement...</p>
+        <div id="answers" class="grid-answers"></div>
+        <div id="score">Score : 0</div>
+      </div>
+      <div class="image-box">
+        <img id="image-question" class="side-image" src="" alt="illustration" />
+        <div class="img-caption">Illustration de la question</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Résultats et classement -->
+  <div id="leaderboard" style="display:none;">
+    <h2>🏆 Classement du jour</h2>
+    <ol id="leaderboard-list"></ol>
+    <div id="old-leaderboards"></div>
+  </div>
+
+  <div id="final-message" style="display:none;">
+    <h2 id="final-text"></h2>
+    <img id="final-image" src="" alt="" />
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Fait par <a href="https://www.linkedin.com/in/anir-hamari/" target="_blank">Anir</a>
+    <div id="sponsors">
+      <img src="salah.png" alt="Sponsor 1">
+      <img src="mecano.png" alt="Sponsor 2">
+      <img src="raibi.png" alt="Sponsor 3">
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+s
