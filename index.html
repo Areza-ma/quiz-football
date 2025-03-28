@@ -64,7 +64,7 @@
     </div>
   </footer>
 
-  <!-- 🔥 Intégration Firebase + export db -->
+  <!-- 🔥 Firebase + Script principal -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
     import { getFirestore } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
@@ -81,11 +81,9 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    window.db = db;
 
-    window.db = db; // ✅ pour utilisation globale dans script.js
+    import("./script.js");
   </script>
-
-  <!-- ✅ Ton script principal en module -->
-  <script type="module" src="script.js"></script>
 </body>
 </html>
