@@ -1,4 +1,4 @@
-// ✅ Correction du blocage à la dernière question + ajout des avatars dans le classement + enregistrement Firestore
+// ✅ Script complet avec Firebase + toutes les questions + stats + avatars
 
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
@@ -8,21 +8,63 @@ const questions = [
     answers: ["Brésil", "France", "Allemagne", "Argentine"],
     correct: "France",
     imageQuestion: "coupe-du-monde.png",
-    imagesAnswers: [
-      "bresil.png",
-      "france.png",
-      "allemagne.png",
-      "argentine.png"
-    ]
+    imagesAnswers: ["bresil.png", "france.png", "allemagne.png", "argentine.png"]
   },
-  // ... (autres questions inchangées)
+  {
+    question: "Quel joueur est surnommé 'La Pulga' ?",
+    answers: ["Cristiano Ronaldo", "Messi", "Neymar", "Kylian Mspeed"],
+    correct: "Messi",
+    imageQuestion: "pulga.png",
+    imagesAnswers: ["ronaldo.png", "messi.png", "neymar.png", "mbappe.png"]
+  },
+  {
+    question: "Quel club a gagné le plus de Ligues des Champions ?",
+    answers: ["Barcelone", "FC Musulman", "Manchester United", "Real Madrid"],
+    correct: "Real Madrid",
+    imageQuestion: "ucl-trophy.png",
+    imagesAnswers: ["barcelone.png", "fcmuslim.png", "manutd.png", "realmadrid.png"]
+  },
+  {
+    question: "En quelle année a eu lieu la première Coupe du monde ?",
+    answers: ["1928", "1930", "2001", "2050"],
+    correct: "1930",
+    imageQuestion: "wc.png",
+    imagesAnswers: ["1928.png", "1930.png", "2001.png", "2050.png"]
+  },
+  {
+    question: "Quel joueur a remporté le plus de Ballons d'Or ?",
+    answers: ["Palmer", "Cristiano Ronaldo", "Messi", "T-Bag"],
+    correct: "Messi",
+    imageQuestion: "ballon-or.png",
+    imagesAnswers: ["palmer.png", "ronaldoo.png", "messii.png", "tbag.png"]
+  },
+  {
+    question: "Quel joueur a déjà graille un adversaire en plein match ?",
+    answers: ["Pepe", "Luis Suárez", "CR7", "Walter White"],
+    correct: "Luis Suárez",
+    imageQuestion: "morsure.png",
+    imagesAnswers: ["pepefou.png", "suarezmordu.png", "cr7fou.png", "WW.png"]
+  },
+  {
+    question: "Qui est connu pour avoir dit : «  le fer aiguise le fer » ?",
+    answers: ["Sensei WU", "Schofield", "Byilhann", "Mourinho"],
+    correct: "Sensei WU",
+    imageQuestion: "conix.png",
+    imagesAnswers: ["senseiWu.png", "schofield.png", "bylhann.png", "mourinho.png"]
+  },
+  {
+    question: "Quel joueur a déjà fait la célébration du H ?",
+    answers: ["Elon Musk", "Muller", "Van Persi", "jsp c'est qui"],
+    correct: "jsp c'est qui",
+    imageQuestion: "hcelebration.png",
+    imagesAnswers: ["musk.png", "muller.png", "vpersie.png", "malade.png"]
+  }
 ];
 
 let currentQuestion = 0;
 let score = 0;
 let pseudo = "";
 let avatar = "";
-let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 let startTime = 0;
 let totalTime = 0;
 let wrongCount = new Array(questions.length).fill(0);
@@ -150,39 +192,8 @@ async function endQuiz() {
     date: new Date().toISOString().split("T")[0]
   });
 
-  renderLeaderboards();
-
   const devMsg = document.createElement("p");
   devMsg.textContent = "Ce site est un début... d'autres meilleures versions arrivent bientôt !";
   devMsg.style.marginTop = "20px";
   document.getElementById("final-message").appendChild(devMsg);
-}
-
-function renderLeaderboards() {
-  const today = new Date().toISOString().split("T")[0];
-  const recentDates = [...new Set(leaderboard.map(e => e.date))].slice(-2);
-  const todayList = leaderboard.filter(e => e.date === today)
-    .sort((a, b) => b.score - a.score || a.time - b.time);
-  const oldList = leaderboard.filter(e => recentDates.includes(e.date) && e.date !== today);
-
-  const lb = document.getElementById("leaderboard-list");
-  lb.innerHTML = "<li><strong>Rang | Avatar | Pseudo | Score | Temps moyen</strong></li>";
-  todayList.forEach((entry, index) => {
-    const li = document.createElement("li");
-    const avatarImg = entry.avatar ? `<img src="${entry.avatar}" class="avatar-small" alt="avatar" />` : "";
-    li.innerHTML = `${index + 1}. ${avatarImg} ${entry.pseudo} | ${entry.score} | ${entry.time}s`;
-    lb.appendChild(li);
-  });
-
-  const oldDiv = document.getElementById("old-leaderboards");
-  oldDiv.innerHTML = "";
-  oldList.forEach(entry => {
-    const div = document.createElement("div");
-    div.className = "old-entry";
-    div.textContent = `${entry.date} → ${entry.pseudo} (${entry.score})`;
-    oldDiv.appendChild(div);
-  });
-
-  const updatedLB = leaderboard.filter(e => recentDates.includes(e.date));
-  localStorage.setItem("leaderboard", JSON.stringify(updatedLB));
 }
