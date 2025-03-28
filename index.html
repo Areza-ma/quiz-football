@@ -63,27 +63,29 @@
       <img src="raibi.png" alt="Sponsor 3">
     </div>
   </footer>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyA1Sna4KVubrxZXlO-d7z0H20DqrAT4Pfs",
-    authDomain: "quiz-football-40bf7.firebaseapp.com",
-    projectId: "quiz-football-40bf7",
-    storageBucket: "quiz-football-40bf7.appspot.com",
-    messagingSenderId: "249935499610",
-    appId: "1:249935499610:web:982c892f84409db4d9e363",
-    measurementId: "G-T4TXLVQ01P"
-  };
+  <!-- 🔥 Intégration Firebase + export db -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1Sna4KVubrxZXlO-d7z0H20DqrAT4Pfs",
+      authDomain: "quiz-football-40bf7.firebaseapp.com",
+      projectId: "quiz-football-40bf7",
+      storageBucket: "quiz-football-40bf7.appspot.com",
+      messagingSenderId: "249935499610",
+      appId: "1:249935499610:web:982c892f84409db4d9e363",
+      measurementId: "G-T4TXLVQ01P"
+    };
 
-  window.db = db; // ✅ pour l’utiliser dans script.js
-</script>
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  <script src="script.js"></script>
+    window.db = db; // ✅ pour utilisation globale dans script.js
+  </script>
+
+  <!-- ✅ Ton script principal en module -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
-s
