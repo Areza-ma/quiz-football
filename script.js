@@ -1,6 +1,7 @@
 // ✅ Correction du blocage à la dernière question + ajout des avatars dans le classement
 
 // script.js (mis à jour avec stats finales)
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
 const questions = [
   {
@@ -196,7 +197,7 @@ function showFeedback(image, message) {
   }, 4500);
 }
 
-function endQuiz() {
+async function endQuiz() {
   document.querySelector(".container").style.display = "none";
   document.getElementById("leaderboard").style.display = "block";
   document.getElementById("final-message").style.display = "block";
@@ -225,8 +226,16 @@ function endQuiz() {
   `;
   document.getElementById("final-message").appendChild(stats);
 
-  leaderboard.push({ pseudo, avatar, score, time: parseFloat(averageTime), date: new Date().toISOString().split("T")[0] });
-  localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+
+await addDoc(collection(window.db, "scores"), {
+  pseudo,
+  avatar,
+  score,
+  time: parseFloat(averageTime),
+  date: new Date().toISOString().split("T")[0]
+});
+
   renderLeaderboards();
 
   const devMsg = document.createElement("p");
