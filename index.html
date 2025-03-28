@@ -14,16 +14,16 @@
     <input type="text" id="pseudo-input" placeholder="Votre pseudo..." />
     <h3>Choisis ton avatar</h3>
     <div id="avatar-selection">
-      <img src="graaland.png" class="avatar-option" onclick="selectAvatar(this)">
-      <img src="100dent.png" class="avatar-option" onclick="selectAvatar(this)">
-      <img src="sercer.png" class="avatar-option" onclick="selectAvatar(this)">
-      <img src="pessoir.png" class="avatar-option" onclick="selectAvatar(this)">
-      <img src="pessisucre.png" class="avatar-option" onclick="selectAvatar(this)">
-      <img src="vinicius.png" class="avatar-option" onclick="selectAvatar(this)">
-      <img src="maitrewu.png" class="avatar-option" onclick="selectAvatar(this)">
-      <img src="angelo.png" class="avatar-option" onclick="selectAvatar(this)">
+      <img src="graaland.png" class="avatar-option" onclick="window.selectAvatar(this)">
+      <img src="100dent.png" class="avatar-option" onclick="window.selectAvatar(this)">
+      <img src="sercer.png" class="avatar-option" onclick="window.selectAvatar(this)">
+      <img src="pessoir.png" class="avatar-option" onclick="window.selectAvatar(this)">
+      <img src="pessisucre.png" class="avatar-option" onclick="window.selectAvatar(this)">
+      <img src="vinicius.png" class="avatar-option" onclick="window.selectAvatar(this)">
+      <img src="maitrewu.png" class="avatar-option" onclick="window.selectAvatar(this)">
+      <img src="angelo.png" class="avatar-option" onclick="window.selectAvatar(this)">
     </div>
-    <button onclick="startQuiz()">Commencer</button>
+    <button onclick="window.startQuiz()">Commencer</button>
   </div>
 
   <!-- Quiz -->
@@ -83,7 +83,10 @@
     const db = getFirestore(app);
     window.db = db;
 
-    import("./script.js");
+    import("./script.js").then(module => {
+      window.startQuiz = module.startQuiz;
+      window.selectAvatar = module.selectAvatar;
+    });
   </script>
 </body>
 </html>
